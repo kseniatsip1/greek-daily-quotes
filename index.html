@@ -7,58 +7,159 @@
 <title>Απόφθεγμα της ημέρας</title>
 
 <style>
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+    padding: 8px;
+    font-family: Arial, "Segoe UI", sans-serif;
     background: transparent;
 }
 
+/* Κεντρική κάρτα */
 .card {
+    position: relative;
     width: 100%;
     max-width: 450px;
-    min-height: 180px;
-    box-sizing: border-box;
+    min-height: 200px;
     margin: auto;
-    padding: 22px 25px;
-    background: #ffffff;
-    border-radius: 14px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 24px 25px 20px;
+
+    background:
+        radial-gradient(circle at 15% 15%, rgba(255,255,255,0.28) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 25%, rgba(255,255,255,0.20) 0 2px, transparent 3px),
+        linear-gradient(135deg, #0b4f9c, #176fc1 55%, #4aa3df);
+
+    background-size: auto, auto, 100% 100%;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 8px 22px rgba(0, 65, 130, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+    overflow: hidden;
+    color: white;
 }
 
+/* Διακοσμητικά αστεράκια */
+.star {
+    position: absolute;
+    color: rgba(255,255,255,0.9);
+    font-size: 18px;
+    animation: twinkle 2.5s infinite ease-in-out;
+}
+
+.star1 {
+    top: 16px;
+    left: 20px;
+}
+
+.star2 {
+    top: 34px;
+    right: 25px;
+    font-size: 13px;
+    animation-delay: 0.7s;
+}
+
+.star3 {
+    bottom: 18px;
+    left: 30px;
+    font-size: 12px;
+    animation-delay: 1.2s;
+}
+
+.star4 {
+    bottom: 28px;
+    right: 22px;
+    font-size: 16px;
+    animation-delay: 1.8s;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.45;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Μικρό εικονίδιο */
+.icon {
+    font-size: 27px;
+    margin-bottom: 3px;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.18));
+}
+
+/* Τίτλος */
 .title {
     font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 18px;
-    color: #333333;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.18);
 }
 
+/* Απόφθεγμα */
 .quote {
     font-size: 18px;
-    line-height: 1.5;
-    color: #444444;
+    line-height: 1.48;
+    font-weight: 500;
     font-style: italic;
+
+    padding: 0 8px;
+
+    text-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
 
+/* Συγγραφέας */
 .author {
     margin-top: 12px;
     font-size: 14px;
-    color: #777777;
+    font-weight: 600;
+    opacity: 0.92;
 }
+
+/* Κάτω μήνυμα */
+.daily {
+    margin-top: 12px;
+    font-size: 11px;
+    opacity: 0.78;
+    letter-spacing: 0.2px;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="card">
-    <div class="title">🌟 Απόφθεγμα της ημέρας</div>
+
+    <div class="star star1">✦</div>
+    <div class="star star2">✧</div>
+    <div class="star star3">✦</div>
+    <div class="star star4">✧</div>
+
+    <div class="icon">📖✨</div>
+
+    <div class="title">
+        Απόφθεγμα της ημέρας
+    </div>
+
     <div class="quote" id="quote"></div>
+
     <div class="author" id="author"></div>
+
+    <div class="daily">
+        ✨ Μια νέα σκέψη κάθε μέρα
+    </div>
+
 </div>
 
 <script>
@@ -167,7 +268,8 @@ const quotes = [
 ];
 
 
-// Υπολογίζει διαφορετικό απόφθεγμα ανά ημέρα
+// Επιλέγει διαφορετικό απόφθεγμα κάθε ημέρα
+
 const today = new Date();
 
 const start = new Date(
